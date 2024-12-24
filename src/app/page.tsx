@@ -1,9 +1,17 @@
-const Home = () => {
+import Link from 'next/link';
+
+const HomePage = () => {
   return (
-    <div className='flex min-h-screen items-center justify-center bg-red-500'>
-      <h1>Hello, world!</h1>
+    <div className='flex min-h-screen items-center justify-center'>
+      <p>
+        Click{' '}
+        <Link href='/documents/123' className='text-blue-500 underline'>
+          here
+        </Link>{' '}
+        to go to document id
+      </p>
     </div>
   );
 };
 
-export default Home;
+export default HomePage;
