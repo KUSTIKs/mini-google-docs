@@ -2,6 +2,7 @@
 
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
+import Underline from '@tiptap/extension-underline';
 import TaskItem from '@tiptap/extension-task-item';
 import TaskList from '@tiptap/extension-task-list';
 import Table from '@tiptap/extension-table';
@@ -10,7 +11,10 @@ import TableHeader from '@tiptap/extension-table-header';
 import TableRow from '@tiptap/extension-table-row';
 import ImageResize from 'tiptap-extension-resize-image';
 
+import { useEditorStore } from '@/store/use-editor-store';
+
 const Editor = () => {
+  const { setEditor } = useEditorStore();
   const editor = useEditor({
     immediatelyRender: false,
     editorProps: {
@@ -23,6 +27,7 @@ const Editor = () => {
     },
     extensions: [
       StarterKit,
+      Underline,
       TaskList,
       TaskItem.configure({
         nested: true,
@@ -36,6 +41,12 @@ const Editor = () => {
       ImageResize,
     ],
     content: '<p>Hello, World! 🌍</p>',
+    onCreate({ editor }) {
+      setEditor(editor);
+    },
+    onDestroy() {
+      setEditor(null);
+    },
   });
 
   return (
