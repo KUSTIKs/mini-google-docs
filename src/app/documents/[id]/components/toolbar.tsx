@@ -18,6 +18,7 @@ const Toolbar = () => {
       <Tool.Bold />
       <Tool.Italic />
       <Tool.Underline />
+      <Tool.TextColor />
       <Separator orientation='vertical' className='h-6 bg-neutral-300' />
       <Tool.Comment />
       <Tool.ListTodo />

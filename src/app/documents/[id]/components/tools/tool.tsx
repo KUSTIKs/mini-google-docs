@@ -10,6 +10,7 @@ import { ListTodoButton } from './list-todo-button';
 import { RemoveFormattingButton } from './remove-formatting-button';
 import { FontFamilySelect } from './font-family-select';
 import { HeadingSelect } from './heading-select';
+import { TextColorButton } from './text-color-button';
 
 const Tool = {
   Undo: UndoButton,
@@ -24,6 +25,7 @@ const Tool = {
   RemoveFormatting: RemoveFormattingButton,
   FontFamily: FontFamilySelect,
   Heading: HeadingSelect,
+  TextColor: TextColorButton,
 };
 
 export { Tool };
