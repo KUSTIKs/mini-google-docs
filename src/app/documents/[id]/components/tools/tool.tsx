@@ -8,7 +8,7 @@ import { UnderlineButton } from './underline-button';
 import { CommentButton } from './comment-button';
 import { ListTodoButton } from './list-todo-button';
 import { RemoveFormattingButton } from './remove-formatting-button';
-import { FontFamilySelect } from './font-family-button';
+import { FontFamilySelect } from './font-family-select';
 
 const Tool = {
   Undo: UndoButton,
