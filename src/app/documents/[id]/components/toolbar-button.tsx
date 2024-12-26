@@ -4,11 +4,11 @@ import { cn } from '@/lib/utils';
 
 type Props = {
   onClick: () => void;
-  isActive: boolean;
+  isActive?: boolean;
   icon: LucideIcon;
 };
 
-const ToolbarButton = ({ onClick, isActive, icon: Icon }: Props) => {
+const ToolButton = ({ onClick, isActive = false, icon: Icon }: Props) => {
   return (
     <button
       onClick={onClick}
@@ -22,4 +22,4 @@ const ToolbarButton = ({ onClick, isActive, icon: Icon }: Props) => {
   );
 };
 
-export { ToolbarButton };
+export { ToolButton };
