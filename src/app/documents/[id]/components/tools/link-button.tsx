@@ -18,7 +18,7 @@ const LinkButton = () => {
     setHref(event.target.value);
   };
 
-  const applyHref = () => {
+  const handleSubmit = () => {
     editor?.chain().focus().extendMarkRange('link').setLink({ href }).run();
     setHref('');
   };
@@ -35,13 +35,18 @@ const LinkButton = () => {
           <Link2Icon className='size-4' />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className='p-2.5 flex items-center gap-x-2'>
-        <Input
-          placeholder='https://apple.com'
-          value={href}
-          onChange={handleChange}
-        />
-        <Button onClick={applyHref}>Apply</Button>
+      <DropdownMenuContent asChild>
+        <form
+          onSubmit={handleSubmit}
+          className='p-2.5 flex items-center gap-x-2'
+        >
+          <Input
+            placeholder='https://apple.com'
+            value={href}
+            onChange={handleChange}
+          />
+          <Button type='submit'>Apply</Button>
+        </form>
       </DropdownMenuContent>
     </DropdownMenu>
   );

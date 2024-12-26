@@ -13,6 +13,7 @@ import { HeadingSelect } from './heading-select';
 import { TextColorButton } from './text-color-button';
 import { HightlightColorButton } from './highlight-color-button';
 import { LinkButton } from './link-button';
+import { ImageButton } from './image-button';
 
 const Tool = {
   Undo: UndoButton,
@@ -30,6 +31,7 @@ const Tool = {
   TextColor: TextColorButton,
   HightlightColor: HightlightColorButton,
   Link: LinkButton,
+  Image: ImageButton,
 };
 
 export { Tool };

@@ -22,6 +22,7 @@ const Toolbar = () => {
       <Tool.HightlightColor />
       <Separator orientation='vertical' className='h-6 bg-neutral-300' />
       <Tool.Link />
+      <Tool.Image />
       <Tool.Comment />
       <Tool.ListTodo />
       <Tool.RemoveFormatting />
