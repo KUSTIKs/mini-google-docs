@@ -12,6 +12,7 @@ import { FontFamilySelect } from './font-family-select';
 import { HeadingSelect } from './heading-select';
 import { TextColorButton } from './text-color-button';
 import { HightlightColorButton } from './highlight-color-button';
+import { LinkButton } from './link-button';
 
 const Tool = {
   Undo: UndoButton,
@@ -28,6 +29,7 @@ const Tool = {
   Heading: HeadingSelect,
   TextColor: TextColorButton,
   HightlightColor: HightlightColorButton,
+  Link: LinkButton,
 };
 
 export { Tool };

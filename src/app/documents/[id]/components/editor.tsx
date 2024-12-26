@@ -2,6 +2,7 @@
 
 import { useEditor, EditorContent } from '@tiptap/react';
 import { StarterKit } from '@tiptap/starter-kit';
+import { Link } from '@tiptap/extension-link';
 import { Underline } from '@tiptap/extension-underline';
 import { FontFamily } from '@tiptap/extension-font-family';
 import { TextStyle } from '@tiptap/extension-text-style';
@@ -19,6 +20,11 @@ import { useEditorStore } from '@/store/use-editor-store';
 
 const extensions = [
   StarterKit,
+  Link.configure({
+    openOnClick: false,
+    autolink: true,
+    defaultProtocol: 'https',
+  }),
   Underline,
   FontFamily,
   TextStyle,
