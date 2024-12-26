@@ -11,6 +11,7 @@ import { RemoveFormattingButton } from './remove-formatting-button';
 import { FontFamilySelect } from './font-family-select';
 import { HeadingSelect } from './heading-select';
 import { TextColorButton } from './text-color-button';
+import { HightlightColorButton } from './highlight-color-button';
 
 const Tool = {
   Undo: UndoButton,
@@ -26,6 +27,7 @@ const Tool = {
   FontFamily: FontFamilySelect,
   Heading: HeadingSelect,
   TextColor: TextColorButton,
+  HightlightColor: HightlightColorButton,
 };
 
 export { Tool };
