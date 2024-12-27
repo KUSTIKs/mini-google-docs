@@ -17,6 +17,7 @@ import { ImageResize } from 'tiptap-extension-resize-image';
 import { Color } from '@tiptap/extension-color';
 import { Highlight } from '@tiptap/extension-highlight';
 
+import { FontSize } from '@/lib/tiptap/font-size.extension';
 import { useEditorStore } from '@/store/use-editor-store';
 
 const extensions = [
@@ -47,6 +48,7 @@ const extensions = [
   Highlight.configure({
     multicolor: true,
   }),
+  FontSize,
 ];
 
 const Editor = () => {
