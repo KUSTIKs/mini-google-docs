@@ -15,6 +15,7 @@ import { HightlightColorButton } from './highlight-color-button';
 import { LinkButton } from './link-button';
 import { ImageButton } from './image-button';
 import { AlignmentButton } from './alignment-button';
+import { ListButton } from './list-button';
 
 const Tool = {
   Undo: UndoButton,
@@ -34,6 +35,7 @@ const Tool = {
   Link: LinkButton,
   Image: ImageButton,
   Alignment: AlignmentButton,
+  List: ListButton,
 };
 
 export { Tool };

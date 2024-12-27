@@ -24,6 +24,7 @@ const Toolbar = () => {
       <Tool.Link />
       <Tool.Image />
       <Tool.Alignment />
+      <Tool.List />
       <Tool.Comment />
       <Tool.ListTodo />
       <Tool.RemoveFormatting />
