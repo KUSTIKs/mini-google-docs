@@ -23,6 +23,7 @@ const Toolbar = () => {
       <Separator orientation='vertical' className='h-6 bg-neutral-300' />
       <Tool.Link />
       <Tool.Image />
+      <Tool.Alignment />
       <Tool.Comment />
       <Tool.ListTodo />
       <Tool.RemoveFormatting />

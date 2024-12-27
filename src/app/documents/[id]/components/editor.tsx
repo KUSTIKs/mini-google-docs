@@ -3,6 +3,7 @@
 import { useEditor, EditorContent } from '@tiptap/react';
 import { StarterKit } from '@tiptap/starter-kit';
 import { Link } from '@tiptap/extension-link';
+import { TextAlign } from '@tiptap/extension-text-align';
 import { Underline } from '@tiptap/extension-underline';
 import { FontFamily } from '@tiptap/extension-font-family';
 import { TextStyle } from '@tiptap/extension-text-style';
@@ -24,6 +25,9 @@ const extensions = [
     openOnClick: false,
     autolink: true,
     defaultProtocol: 'https',
+  }),
+  TextAlign.configure({
+    types: ['heading', 'paragraph'],
   }),
   Underline,
   FontFamily,
