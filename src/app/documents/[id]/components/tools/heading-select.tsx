@@ -69,7 +69,7 @@ const HeadingSelect = () => {
             onClick={() => setHeading(level)}
             className={cn(
               'flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80',
-              editorState?.heading?.level == level && 'bg-neutral-200/80'
+              editorState?.heading?.level === level && 'bg-neutral-200/80'
             )}
             style={{ fontSize }}
           >

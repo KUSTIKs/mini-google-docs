@@ -64,7 +64,7 @@ const ListButton = () => {
             onClick={() => setList(type)}
             className={cn(
               'flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80',
-              editorState?.list?.type == type && 'bg-neutral-200/80'
+              editorState?.list?.type === type && 'bg-neutral-200/80'
             )}
           >
             <Icon className='size-4' />

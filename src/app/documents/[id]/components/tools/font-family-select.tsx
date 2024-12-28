@@ -47,7 +47,7 @@ const FontFamilySelect = () => {
             onClick={() => setFontFamily(fontFamily)}
             className={cn(
               'flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80',
-              editorState?.fontFamily == fontFamily && 'bg-neutral-200/80'
+              editorState?.fontFamily === fontFamily && 'bg-neutral-200/80'
             )}
             style={{ fontFamily }}
           >
