@@ -17,6 +17,7 @@ import { ImageButton } from './image-button';
 import { AlignmentButton } from './alignment-button';
 import { ListButton } from './list-button';
 import { FontSizeButton } from './font-size-button';
+import { LineHeightButton } from './line-height-button';
 
 const Tool = {
   Undo: UndoButton,
@@ -38,6 +39,7 @@ const Tool = {
   Alignment: AlignmentButton,
   List: ListButton,
   FontSize: FontSizeButton,
+  LineHeight: LineHeightButton,
 };
 
 export { Tool };

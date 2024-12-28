@@ -26,6 +26,7 @@ const Toolbar = () => {
       <Tool.Link />
       <Tool.Image />
       <Tool.Alignment />
+      <Tool.LineHeight />
       <Tool.List />
       <Tool.Comment />
       <Tool.ListTodo />
