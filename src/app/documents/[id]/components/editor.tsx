@@ -18,6 +18,7 @@ import { Color } from '@tiptap/extension-color';
 import { Highlight } from '@tiptap/extension-highlight';
 
 import { FontSize } from '@/lib/tiptap/font-size.extension';
+import { LineHeight } from '@/lib/tiptap/line-height.extension';
 import { useEditorStore } from '@/store/use-editor-store';
 
 const extensions = [
@@ -49,6 +50,10 @@ const extensions = [
     multicolor: true,
   }),
   FontSize,
+  LineHeight.configure({
+    types: ['heading', 'paragraph'],
+    defaultLineHeight: 'normal',
+  }),
 ];
 
 const Editor = () => {
