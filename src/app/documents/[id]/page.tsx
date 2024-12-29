@@ -1,4 +1,5 @@
 import { Editor } from './components/editor';
+import { Navbar } from './components/navbar';
 import { Toolbar } from './components/toolbar';
 
 type Props = {
@@ -10,7 +11,10 @@ type Props = {
 const DocumentPage = async ({}: Props) => {
   return (
     <div className='min-h-screen bg-[#fafbfd]'>
-      <Toolbar />
+      <div className='flex flex-col px-4 pt-2 gap-y-2 sticky top-0 left-0 z-10 bg-[#fafbfd] print:hidden'>
+        <Navbar />
+        <Toolbar />
+      </div>
       <Editor />
     </div>
   );
