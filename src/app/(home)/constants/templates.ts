@@ -1,14 +1,5 @@
-type TemplateType =
-  | 'blankDocument'
-  | 'businessLetter'
-  | 'coverLetter'
-  | 'letter'
-  | 'projectProposal'
-  | 'resume'
-  | 'softwareProposal';
-
 type Template = {
-  id: TemplateType;
+  id: string;
   label: string;
   imageSrc: string;
 };
@@ -51,4 +42,5 @@ const templates: Template[] = [
   },
 ];
 
+export type { Template };
 export { templates };
