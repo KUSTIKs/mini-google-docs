@@ -1,5 +1,4 @@
 import { useEditorState } from '@tiptap/react';
-import { ListIcon, ListOrderedIcon, LucideIcon } from 'lucide-react';
 
 import {
   DropdownMenu,
@@ -8,27 +7,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useEditorStore } from '@/store/use-editor-store';
 import { cn } from '@/lib/utils';
-
-type ListType = 'bulletList' | 'orderedList';
-
-type List = {
-  label: string;
-  type: ListType;
-  icon: LucideIcon;
-};
-
-const lists: List[] = [
-  {
-    icon: ListIcon,
-    label: 'Bullet List',
-    type: 'bulletList',
-  },
-  {
-    icon: ListOrderedIcon,
-    label: 'Ordered List',
-    type: 'orderedList',
-  },
-];
+import { lists, ListType } from '../../constants/lists';
 
 const ListButton = () => {
   const { editor } = useEditorStore();
@@ -48,7 +27,7 @@ const ListButton = () => {
     editor?.chain().focus().toggleBulletList().run();
   };
 
-  const CurrentIcon = editorState?.list?.icon || ListIcon;
+  const CurrentIcon = editorState?.list?.icon || lists[0].icon;
 
   return (
     <DropdownMenu>

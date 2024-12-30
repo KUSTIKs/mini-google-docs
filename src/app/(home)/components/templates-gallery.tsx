@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 
-import { templates } from '@/constants/templates';
 import { cn } from '@/lib/utils';
 import {
   Carousel,
@@ -11,6 +10,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+import { templates } from '../constants/templates';
 
 const TemplatesGallery = () => {
   const isCreating = false;

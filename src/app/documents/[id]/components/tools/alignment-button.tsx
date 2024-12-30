@@ -1,11 +1,4 @@
 import { useEditorState } from '@tiptap/react';
-import {
-  AlignCenterIcon,
-  AlignJustifyIcon,
-  AlignLeftIcon,
-  AlignRightIcon,
-  LucideIcon,
-} from 'lucide-react';
 
 import {
   DropdownMenu,
@@ -14,35 +7,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useEditorStore } from '@/store/use-editor-store';
 import { cn } from '@/lib/utils';
-
-type Alignment = {
-  label: string;
-  value: string;
-  icon: LucideIcon;
-};
-
-const alignemnts: Alignment[] = [
-  {
-    label: 'Align left',
-    value: 'left',
-    icon: AlignLeftIcon,
-  },
-  {
-    label: 'Align center',
-    value: 'center',
-    icon: AlignCenterIcon,
-  },
-  {
-    label: 'Align right',
-    value: 'right',
-    icon: AlignRightIcon,
-  },
-  {
-    label: 'Align justify',
-    value: 'justify',
-    icon: AlignJustifyIcon,
-  },
-];
+import { alignemnts } from '../../constants/alignments';
 
 const AlignmentButton = () => {
   const { editor } = useEditorStore();
@@ -59,7 +24,7 @@ const AlignmentButton = () => {
     editor?.chain().focus().setTextAlign(alignment).run();
   };
 
-  const CurrentIcon = editorState?.alignment?.icon || AlignLeftIcon;
+  const CurrentIcon = editorState?.alignment?.icon || alignemnts[0].icon;
 
   return (
     <DropdownMenu>

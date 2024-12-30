@@ -8,14 +8,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-
-const fontFamilies = [
-  'Arial',
-  'Times New Roman',
-  'Counrier New',
-  'Georgia',
-  'Verdana',
-];
+import { fontFamilies } from '../../constants/font-families';
 
 const FontFamilySelect = () => {
   const { editor } = useEditorStore();
