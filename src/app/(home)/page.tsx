@@ -1,5 +1,6 @@
 import { Navbar } from './components/navbar';
 import { TemplatesGallery } from './components/templates-gallery';
+import { DocumentsList } from './components/documents-list';
 
 const HomePage = () => {
   return (
@@ -9,6 +10,7 @@ const HomePage = () => {
       </div>
       <div>
         <TemplatesGallery />
+        <DocumentsList />
       </div>
     </div>
   );
