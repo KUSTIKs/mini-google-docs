@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { UserButton } from '@clerk/nextjs';
 
 import { SearchInput } from './search-input';
 
@@ -13,7 +14,9 @@ const Navbar = () => {
         <h3 className='text-lg'>Docs</h3>
       </div>
       <SearchInput />
-      <div className='flex-1'></div>
+      <div className='flex-1 flex justify-end'>
+        <UserButton />
+      </div>
     </nav>
   );
 };
