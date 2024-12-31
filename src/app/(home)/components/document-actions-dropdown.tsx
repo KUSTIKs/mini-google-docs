@@ -1,13 +1,19 @@
-import { ExternalLinkIcon, MoreVerticalIcon, TrashIcon } from 'lucide-react';
+import {
+  ExternalLinkIcon,
+  FilePenIcon,
+  MoreVerticalIcon,
+  TrashIcon,
+} from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
 import { DeleteDocumentDialog } from '@/components/delete-document-dialog';
+import { RenameDocumentDialog } from '@/components/rename-document-dialog';
 import { Id } from '@convex/_generated/dataModel';
 
 type Props = {
@@ -35,6 +41,12 @@ const DocumentActionsDropdown = ({ documentId, title }: Props) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
+        <RenameDocumentDialog documentId={documentId} initialTitle={title}>
+          <DropdownMenuItem onSelect={preventDefault} onClick={stopPropagation}>
+            <FilePenIcon className='size-4 mr-2' />
+            Rename
+          </DropdownMenuItem>
+        </RenameDocumentDialog>
         <DeleteDocumentDialog documentId={documentId}>
           <DropdownMenuItem onSelect={preventDefault} onClick={stopPropagation}>
             <TrashIcon className='size-4 mr-2' />

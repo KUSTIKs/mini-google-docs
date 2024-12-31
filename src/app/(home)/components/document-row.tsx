@@ -1,10 +1,9 @@
-import { Building2Icon, CircleUserIcon, MoreVerticalIcon } from 'lucide-react';
+import { Building2Icon, CircleUserIcon } from 'lucide-react';
 import { SiGoogledocs } from 'react-icons/si';
 import { format } from 'date-fns';
 
 import { TableCell, TableRow } from '@/components/ui/table';
 import { Doc } from '@convex/_generated/dataModel';
-import { Button } from '@/components/ui/button';
 import { DocumentActionsDropdown } from './document-actions-dropdown';
 
 type Props = {
