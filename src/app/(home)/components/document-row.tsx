@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import { Building2Icon, CircleUserIcon } from 'lucide-react';
 import { SiGoogledocs } from 'react-icons/si';
 import { format } from 'date-fns';
@@ -11,11 +12,17 @@ type Props = {
 };
 
 const DocumentRow = ({ document }: Props) => {
+  const router = useRouter();
+
   const creationDate = new Date(document._creationTime);
   const formattedCreationDate = format(creationDate, 'MMM dd, yyyy');
 
+  const openDocument = () => {
+    router.push(`/documents/${document._id}`);
+  };
+
   return (
-    <TableRow>
+    <TableRow onClick={openDocument} className='cursor-pointer'>
       <TableCell>
         <div className='flex items-center gap-2'>
           <SiGoogledocs className='size-6 fill-blue-500' />

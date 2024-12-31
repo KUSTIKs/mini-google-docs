@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/button';
 import { DeleteDocumentDialog } from '@/components/delete-document-dialog';
 import { RenameDocumentDialog } from '@/components/rename-document-dialog';
 import { Id } from '@convex/_generated/dataModel';
+import { useState } from 'react';
 
 type Props = {
   documentId: Id<'documents'>;
@@ -22,6 +23,8 @@ type Props = {
 };
 
 const DocumentActionsDropdown = ({ documentId, title }: Props) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   const openInNewTab = () => {
     window.open(`/documents/${documentId}`, '_blank');
   };
@@ -34,21 +37,25 @@ const DocumentActionsDropdown = ({ documentId, title }: Props) => {
   };
 
   return (
-    <DropdownMenu>
+    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
         <Button variant='ghost' size='icon' className='rounded-full'>
           <MoreVerticalIcon />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        <RenameDocumentDialog documentId={documentId} initialTitle={title}>
-          <DropdownMenuItem onSelect={preventDefault} onClick={stopPropagation}>
+      <DropdownMenuContent onClick={stopPropagation}>
+        <RenameDocumentDialog
+          documentId={documentId}
+          initialTitle={title}
+          onOpenChange={setIsOpen}
+        >
+          <DropdownMenuItem onSelect={preventDefault}>
             <FilePenIcon className='size-4 mr-2' />
             Rename
           </DropdownMenuItem>
         </RenameDocumentDialog>
-        <DeleteDocumentDialog documentId={documentId}>
-          <DropdownMenuItem onSelect={preventDefault} onClick={stopPropagation}>
+        <DeleteDocumentDialog documentId={documentId} onOpenChange={setIsOpen}>
+          <DropdownMenuItem onSelect={preventDefault}>
             <TrashIcon className='size-4 mr-2' />
             Remove
           </DropdownMenuItem>

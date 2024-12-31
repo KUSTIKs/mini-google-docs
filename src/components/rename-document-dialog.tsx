@@ -5,10 +5,10 @@ import {
   useState,
 } from 'react';
 import { useMutation } from 'convex/react';
+import { DialogProps } from '@radix-ui/react-dialog';
 
 import { api } from '@convex/_generated/api';
 import { Id } from '@convex/_generated/dataModel';
-
 import {
   Dialog,
   DialogClose,
@@ -26,17 +26,18 @@ type Props = {
   documentId: Id<'documents'>;
   children: ReactNode;
   initialTitle: string;
-};
+} & Pick<DialogProps, 'onOpenChange'>;
 
 const RenameDocumentDialog = ({
   documentId,
   children,
   initialTitle,
+  onOpenChange,
 }: Props) => {
   const renameDocumentById = useMutation(api.documents.updateById);
   const [isLoading, setIsLoading] = useState(false);
   const [title, setTitle] = useState(initialTitle);
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     setTitle(event.target.value);
@@ -62,14 +63,15 @@ const RenameDocumentDialog = ({
       });
   };
 
-  const stopPropagation = (event: Pick<Event, 'stopPropagation'>) => {
-    event.stopPropagation();
+  const handleOpenChange = (isOpen: boolean) => {
+    setIsOpen(isOpen);
+    onOpenChange?.(isOpen);
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog open={isOpen} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent onClick={stopPropagation}>
+      <DialogContent>
         <form onSubmit={handleSubmit}>
           <DialogHeader>
             <DialogTitle>Rename document</DialogTitle>
@@ -82,25 +84,15 @@ const RenameDocumentDialog = ({
               value={title}
               onChange={handleChange}
               placeholder='Document name'
-              onClick={stopPropagation}
             />
           </div>
           <DialogFooter>
             <DialogClose asChild>
-              <Button
-                type='button'
-                variant='ghost'
-                disabled={isLoading}
-                onClick={stopPropagation}
-              >
+              <Button type='button' variant='outline' disabled={isLoading}>
                 Cancel
               </Button>
             </DialogClose>
-            <Button
-              type='submit'
-              disabled={isLoading}
-              onClick={stopPropagation}
-            >
+            <Button type='submit' disabled={isLoading}>
               Rename
             </Button>
           </DialogFooter>

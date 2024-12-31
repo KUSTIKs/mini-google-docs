@@ -1,9 +1,9 @@
 import { ReactNode, useState } from 'react';
 import { useMutation } from 'convex/react';
+import { AlertDialogProps } from '@radix-ui/react-alert-dialog';
 
 import { api } from '@convex/_generated/api';
 import { Id } from '@convex/_generated/dataModel';
-
 import {
   AlertDialog,
   AlertDialogAction,
@@ -19,9 +19,13 @@ import {
 type Props = {
   documentId: Id<'documents'>;
   children: ReactNode;
-};
+} & Pick<AlertDialogProps, 'onOpenChange'>;
 
-const DeleteDocumentDialog = ({ documentId, children }: Props) => {
+const DeleteDocumentDialog = ({
+  documentId,
+  children,
+  onOpenChange,
+}: Props) => {
   const deleteDocumentById = useMutation(api.documents.deleteById);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -32,14 +36,10 @@ const DeleteDocumentDialog = ({ documentId, children }: Props) => {
     });
   };
 
-  const stopPropagation = (event: Pick<Event, 'stopPropagation'>) => {
-    event.stopPropagation();
-  };
-
   return (
-    <AlertDialog>
+    <AlertDialog onOpenChange={onOpenChange}>
       <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
-      <AlertDialogContent onClick={stopPropagation}>
+      <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you sure?</AlertDialogTitle>
           <AlertDialogDescription>
@@ -48,9 +48,7 @@ const DeleteDocumentDialog = ({ documentId, children }: Props) => {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel onClick={stopPropagation}>
-            Cancel
-          </AlertDialogCancel>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction onClick={deleteDocument} disabled={isLoading}>
             Delete
           </AlertDialogAction>
