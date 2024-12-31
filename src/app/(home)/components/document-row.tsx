@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 import { TableCell, TableRow } from '@/components/ui/table';
 import { Doc } from '@convex/_generated/dataModel';
 import { Button } from '@/components/ui/button';
+import { DocumentActionsDropdown } from './document-actions-dropdown';
 
 type Props = {
   document: Doc<'documents'>;
@@ -34,9 +35,10 @@ const DocumentRow = ({ document }: Props) => {
       </TableCell>
       <TableCell>{formattedCreationDate}</TableCell>
       <TableCell className='float-right'>
-        <Button variant='ghost' size='icon' className='rounded-full'>
-          <MoreVerticalIcon />
-        </Button>
+        <DocumentActionsDropdown
+          documentId={document._id}
+          title={document.title}
+        />
       </TableCell>
     </TableRow>
   );
