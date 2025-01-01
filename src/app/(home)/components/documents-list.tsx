@@ -13,15 +13,21 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { DocumentRow } from './document-row';
+import { Button } from '@/components/ui/button';
 
 const DocumentsList = () => {
-  const { results: documents, isLoading } = usePaginatedQuery(
-    api.documents.getAll,
-    {},
-    { initialNumItems: 5 }
-  );
+  const {
+    results: documents,
+    isLoading,
+    status,
+    loadMore,
+  } = usePaginatedQuery(api.documents.getAll, {}, { initialNumItems: 5 });
 
-  if (isLoading) {
+  const handleLoadMoreClick = () => {
+    loadMore(5);
+  };
+
+  if (status === 'LoadingFirstPage') {
     return (
       <div className='max-w-screen-xl mx-auto px-16 py-6 flex justify-center items-center h-24'>
         <LoaderIcon className='animate-spin text-muted-foreground size-5' />
@@ -57,6 +63,20 @@ const DocumentsList = () => {
           ))}
         </TableBody>
       </Table>
+      <div className='flex items-center justify-center'>
+        {status === 'CanLoadMore' ? (
+          <Button
+            variant='ghost'
+            size='sm'
+            onClick={handleLoadMoreClick}
+            disabled={isLoading}
+          >
+            Load more
+          </Button>
+        ) : (
+          <p className='text-sm text-muted-foreground'>End of results</p>
+        )}
+      </div>
     </div>
   );
 };
