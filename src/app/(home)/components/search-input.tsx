@@ -29,7 +29,7 @@ const SearchInput = () => {
   };
 
   return (
-    <div className='flex-1 flex items-center justify-center'>
+    <div className='basis-1/3 min-w-[200px] flex items-center justify-center'>
       <form onSubmit={handleSubmit} className='relative max-w-[720px] w-full'>
         <Input
           value={value}

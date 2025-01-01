@@ -6,6 +6,7 @@ import {
 } from 'react';
 import { useMutation } from 'convex/react';
 import { DialogProps } from '@radix-ui/react-dialog';
+import { toast } from 'sonner';
 
 import { api } from '@convex/_generated/api';
 import { Id } from '@convex/_generated/dataModel';
@@ -57,7 +58,10 @@ const RenameDocumentDialog = ({
     })
       .then(() => {
         setIsOpen(false);
+        onOpenChange?.(false);
+        toast.success('Document renamed');
       })
+      .catch(() => toast.error('Something went wrong'))
       .finally(() => {
         setIsLoading(false);
       });

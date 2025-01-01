@@ -1,6 +1,7 @@
 import { ReactNode, useState } from 'react';
 import { useMutation } from 'convex/react';
 import { AlertDialogProps } from '@radix-ui/react-alert-dialog';
+import { toast } from 'sonner';
 
 import { api } from '@convex/_generated/api';
 import { Id } from '@convex/_generated/dataModel';
@@ -31,9 +32,12 @@ const DeleteDocumentDialog = ({
 
   const deleteDocument = () => {
     setIsLoading(true);
-    deleteDocumentById({ id: documentId }).finally(() => {
-      setIsLoading(false);
-    });
+    deleteDocumentById({ id: documentId })
+      .catch(() => toast.error('Something went wrong'))
+      .then(() => toast.success('Document deleted'))
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (

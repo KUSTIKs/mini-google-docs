@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useMutation } from 'convex/react';
+import { toast } from 'sonner';
 
 import { cn } from '@/lib/utils';
 import {
@@ -29,7 +30,9 @@ const TemplatesGallery = () => {
     })
       .then((documentId) => {
         router.push(`/documents/${documentId}`);
+        toast.success('Document created');
       })
+      .catch(() => toast.error('Something went wrong'))
       .finally(() => {
         setIsCreating(false);
       });

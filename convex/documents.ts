@@ -1,6 +1,7 @@
 import { paginationOptsValidator } from 'convex/server';
 import { mutation, query } from './_generated/server';
 import { ConvexError, v } from 'convex/values';
+import { parseString } from '@/lib/utils';
 
 const create = mutation({
   args: {
@@ -14,10 +15,13 @@ const create = mutation({
       throw new ConvexError('Unauthorized');
     }
 
+    const organizationId = parseString(user.organization_id);
+
     const documentId = await ctx.db.insert('documents', {
       title: args.title ?? 'Untitled document',
       ownerId: user.subject,
       initialContent: args.initialContent,
+      organizationId,
     });
 
     return documentId;
@@ -34,6 +38,28 @@ const getAll = query({
 
     if (!user) {
       throw new ConvexError('Unauthorized');
+    }
+
+    const organizationId = parseString(user.organization_id);
+
+    if (search && organizationId) {
+      const documents = await ctx.db
+        .query('documents')
+        .withSearchIndex('search_title', (q) =>
+          q.search('title', search).eq('organizationId', organizationId)
+        )
+        .paginate(paginationOpts);
+
+      return documents;
+    } else if (organizationId) {
+      const documents = await ctx.db
+        .query('documents')
+        .withIndex('by_organization_id', (q) =>
+          q.eq('organizationId', organizationId)
+        )
+        .paginate(paginationOpts);
+
+      return documents;
     }
 
     if (search) {
@@ -74,9 +100,12 @@ const updateById = mutation({
       throw new ConvexError('Document not found');
     }
 
-    const isOwner = document.ownerId === user.subject;
+    const organizationId = parseString(user.organization_id);
 
-    if (!isOwner) {
+    const isOwner = document.ownerId === user.subject;
+    const isOrgMember = document.organizationId === organizationId;
+
+    if (!isOwner && !isOrgMember) {
       throw new ConvexError('Unauthorized');
     }
 
@@ -103,9 +132,12 @@ const deleteById = mutation({
       throw new ConvexError('Document not found');
     }
 
-    const isOwner = document.ownerId === user.subject;
+    const organizationId = parseString(user.organization_id);
 
-    if (!isOwner) {
+    const isOwner = document.ownerId === user.subject;
+    const isOrgMember = document.organizationId === organizationId;
+
+    if (!isOwner && !isOrgMember) {
       throw new ConvexError('Unauthorized');
     }
 
