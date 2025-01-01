@@ -36,6 +36,7 @@ import {
   MenubarTrigger,
 } from '@/components/ui/menubar';
 import { useEditorStore } from '@/store/use-editor-store';
+import { OrganizationSwitcher, UserButton } from '@clerk/nextjs';
 
 const Navbar = () => {
   const { editor } = useEditorStore();
@@ -273,6 +274,16 @@ const Navbar = () => {
             </Menubar>
           </div>
         </div>
+      </div>
+
+      <div className='flex-1 flex justify-end gap-2'>
+        <OrganizationSwitcher
+          afterCreateOrganizationUrl='/'
+          afterLeaveOrganizationUrl='/'
+          afterSelectOrganizationUrl='/'
+          afterSelectPersonalUrl='/'
+        />
+        <UserButton />
       </div>
     </nav>
   );
