@@ -14,14 +14,20 @@ import {
 } from '@/components/ui/table';
 import { DocumentRow } from './document-row';
 import { Button } from '@/components/ui/button';
+import { useSearchParam } from '@/hooks/use-search-param';
 
 const DocumentsList = () => {
+  const [search] = useSearchParam();
   const {
     results: documents,
     isLoading,
     status,
     loadMore,
-  } = usePaginatedQuery(api.documents.getAll, {}, { initialNumItems: 5 });
+  } = usePaginatedQuery(
+    api.documents.getAll,
+    { search },
+    { initialNumItems: 5 }
+  );
 
   const handleLoadMoreClick = () => {
     loadMore(5);
