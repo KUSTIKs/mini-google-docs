@@ -1,3 +1,4 @@
+import { Room } from './room';
 import { Editor } from './components/editor';
 import { Navbar } from './components/navbar';
 import { Toolbar } from './components/toolbar';
@@ -15,7 +16,9 @@ const DocumentPage = async ({}: Props) => {
         <Navbar />
         <Toolbar />
       </div>
-      <Editor />
+      <Room>
+        <Editor />
+      </Room>
     </div>
   );
 };

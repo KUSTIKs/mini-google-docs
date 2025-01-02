@@ -18,7 +18,9 @@ import { FontSize } from '@/lib/tiptap/font-size.extension';
 import { LineHeight } from '@/lib/tiptap/line-height.extension';
 
 const editorExtensions = [
-  StarterKit,
+  StarterKit.configure({
+    history: false,
+  }),
   Link.configure({
     openOnClick: false,
     autolink: true,

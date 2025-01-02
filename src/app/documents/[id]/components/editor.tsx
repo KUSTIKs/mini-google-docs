@@ -1,12 +1,15 @@
 'use client';
 
 import { useEditor, EditorContent } from '@tiptap/react';
+import { useLiveblocksExtension } from '@liveblocks/react-tiptap';
 
 import { useEditorStore } from '@/store/use-editor-store';
 import { editorExtensions } from '../lib/tiptap';
 import { Ruller } from './ruller';
 
 const Editor = () => {
+  const liveblocks = useLiveblocksExtension();
+
   const { setEditor } = useEditorStore();
   const editor = useEditor({
     immediatelyRender: false,
@@ -18,8 +21,7 @@ const Editor = () => {
           pt-10 pr-14 pb-10 cursor-text`,
       },
     },
-    extensions: editorExtensions,
-    content: '<p>Hello, World! 🌍</p>',
+    extensions: [...editorExtensions, liveblocks],
     onCreate({ editor }) {
       setEditor(editor);
     },
