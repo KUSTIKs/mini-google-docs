@@ -20,11 +20,7 @@ const Room = ({ children }: Props) => {
   const { id: documentId } = useParams<Params>();
 
   return (
-    <LiveblocksProvider
-      publicApiKey={
-        'pk_dev_JVVybL8Y-_GmXGENkXReB-ks1hfmuX97smT9gQDwvrLqG46bhMKecIo8gQFyZycN'
-      }
-    >
+    <LiveblocksProvider throttle={16} authEndpoint='/api/liveblocks-auth'>
       <RoomProvider id={documentId}>
         <ClientSideSuspense fallback={<div>Loading…</div>}>
           {children}
