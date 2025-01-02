@@ -6,13 +6,14 @@ import {
   RoomProvider,
   ClientSideSuspense,
 } from '@liveblocks/react/suspense';
+import { ResolveUsersArgs } from '@liveblocks/node';
 import { useParams } from 'next/navigation';
+import { toast } from 'sonner';
 
 import { FullscreenLoader } from '@/components/fullscreen-loader';
 import { User } from '../lib/liveblocks';
-import { getUsers } from '../actions';
-import { toast } from 'sonner';
-import { ResolveUsersArgs } from '@liveblocks/node';
+import { getUsers, getDocuments } from '../actions';
+import { Id } from '@convex/_generated/dataModel';
 
 type Props = {
   children: ReactNode;
@@ -49,6 +50,12 @@ const Room = ({ children }: Props) => {
 
     return result;
   };
+  const resolveRoomsInfo = async ({ roomIds }: { roomIds: string[] }) => {
+    const ids = roomIds as Id<'documents'>[];
+    const documents = await getDocuments({ ids });
+
+    return documents;
+  };
 
   const authEndpoint = async () => {
     const url = '/api/liveblocks-auth';
@@ -73,7 +80,7 @@ const Room = ({ children }: Props) => {
       authEndpoint={authEndpoint}
       resolveUsers={resolveUsers}
       resolveMentionSuggestions={resolveMentionSuggestions}
-      resolveRoomsInfo={() => []}
+      resolveRoomsInfo={resolveRoomsInfo}
     >
       <RoomProvider id={documentId}>
         <ClientSideSuspense

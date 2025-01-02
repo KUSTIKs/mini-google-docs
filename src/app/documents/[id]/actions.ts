@@ -1,8 +1,13 @@
 'use server';
 
 import { auth, clerkClient } from '@clerk/nextjs/server';
+import { ConvexHttpClient } from 'convex/browser';
 
+import { Id } from '@convex/_generated/dataModel';
 import { User } from './lib/liveblocks';
+import { api } from '@convex/_generated/api';
+
+const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
 const getUsers = async () => {
   const { sessionClaims } = await auth();
@@ -24,4 +29,10 @@ const getUsers = async () => {
   return users;
 };
 
-export { getUsers };
+const getDocuments = async ({ ids }: { ids: Id<'documents'>[] }) => {
+  const documents = await convex.query(api.documents.getByIds, { ids });
+
+  return documents;
+};
+
+export { getUsers, getDocuments };

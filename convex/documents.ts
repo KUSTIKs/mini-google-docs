@@ -95,6 +95,24 @@ const getById = query({
   },
 });
 
+const getByIds = query({
+  args: { ids: v.array(v.id('documents')) },
+  async handler(ctx, { ids }) {
+    const documents = [];
+
+    for (const id of ids) {
+      const document = await ctx.db.get(id);
+
+      documents.push({
+        id,
+        name: document?.title ?? '[Removed]',
+      });
+    }
+
+    return documents;
+  },
+});
+
 const updateById = mutation({
   args: {
     id: v.id('documents'),
@@ -160,4 +178,4 @@ const deleteById = mutation({
   },
 });
 
-export { create, getAll, getById, updateById, deleteById };
+export { create, getAll, getById, getByIds, updateById, deleteById };
