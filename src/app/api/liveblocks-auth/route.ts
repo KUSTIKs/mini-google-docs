@@ -48,8 +48,9 @@ const POST = async (req: Request) => {
 
   const session = liveblocks.prepareSession(user.id, {
     userInfo: {
-      name: user.fullName ?? 'Anonymous',
-      avatar: user.imageUrl,
+      name:
+        user.fullName || user.primaryEmailAddress?.emailAddress || 'Anonymous',
+      avatarUrl: user.imageUrl,
     },
   });
   session.allow(room, session.FULL_ACCESS);

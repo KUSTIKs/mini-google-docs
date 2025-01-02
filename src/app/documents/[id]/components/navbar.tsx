@@ -21,6 +21,8 @@ import {
   Undo2Icon,
 } from 'lucide-react';
 import { BsFilePdf } from 'react-icons/bs';
+import { ClientSideSuspense } from '@liveblocks/react';
+import { OrganizationSwitcher, UserButton } from '@clerk/nextjs';
 
 import { DocumentTitle } from './document-title';
 import {
@@ -36,7 +38,7 @@ import {
   MenubarTrigger,
 } from '@/components/ui/menubar';
 import { useEditorStore } from '@/store/use-editor-store';
-import { OrganizationSwitcher, UserButton } from '@clerk/nextjs';
+import { AvatarsStack } from './avatars-stack';
 
 const Navbar = () => {
   const { editor } = useEditorStore();
@@ -276,7 +278,10 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div className='flex-1 flex justify-end gap-2'>
+      <div className='flex-1 flex items-center justify-end gap-2'>
+        <ClientSideSuspense fallback={null}>
+          <AvatarsStack />
+        </ClientSideSuspense>
         <OrganizationSwitcher
           afterCreateOrganizationUrl='/'
           afterLeaveOrganizationUrl='/'

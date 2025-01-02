@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
 import { ConvexClientProvider } from '@/components/provides/convex-client-provider';
+import { TooltipProvider } from '@/components/ui/tooltip';
 import { Toaster } from '@/components/ui/sonner';
 
 import '@liveblocks/react-ui/styles.css';
@@ -29,8 +30,10 @@ const RootLayout = ({ children }: Props) => {
       <body className={`${inter.className} antialiased`}>
         <NuqsAdapter>
           <ConvexClientProvider>
-            <Toaster />
-            {children}
+            <TooltipProvider>
+              <Toaster />
+              {children}
+            </TooltipProvider>
           </ConvexClientProvider>
         </NuqsAdapter>
       </body>
