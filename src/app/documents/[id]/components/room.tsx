@@ -50,6 +50,19 @@ const Room = ({ children }: Props) => {
     return result;
   };
 
+  const authEndpoint = async () => {
+    const url = '/api/liveblocks-auth';
+    const params = { room: documentId };
+
+    const response = await fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(params),
+    });
+    const data = await response.json();
+
+    return data;
+  };
+
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -57,7 +70,7 @@ const Room = ({ children }: Props) => {
   return (
     <LiveblocksProvider
       throttle={16}
-      authEndpoint='/api/liveblocks-auth'
+      authEndpoint={authEndpoint}
       resolveUsers={resolveUsers}
       resolveMentionSuggestions={resolveMentionSuggestions}
       resolveRoomsInfo={() => []}

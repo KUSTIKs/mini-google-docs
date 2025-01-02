@@ -39,6 +39,7 @@ import {
 } from '@/components/ui/menubar';
 import { useEditorStore } from '@/store/use-editor-store';
 import { AvatarsStack } from './avatars-stack';
+import { Inbox } from './inbox';
 
 const Navbar = () => {
   const { editor } = useEditorStore();
@@ -279,6 +280,9 @@ const Navbar = () => {
       </div>
 
       <div className='flex-1 flex items-center justify-end gap-2'>
+        <ClientSideSuspense fallback={null}>
+          <Inbox />
+        </ClientSideSuspense>
         <ClientSideSuspense fallback={null}>
           <AvatarsStack />
         </ClientSideSuspense>
