@@ -1,4 +1,4 @@
-import { Room } from './room';
+import { Room } from './components/room';
 import { Editor } from './components/editor';
 import { Navbar } from './components/navbar';
 import { Toolbar } from './components/toolbar';
