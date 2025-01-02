@@ -11,15 +11,15 @@ type Props = {
 
 const DocumentPage = async ({}: Props) => {
   return (
-    <div className='min-h-screen bg-[#fafbfd]'>
-      <div className='flex flex-col px-4 pt-2 gap-y-2 sticky top-0 left-0 z-10 bg-[#fafbfd] print:hidden'>
-        <Navbar />
-        <Toolbar />
-      </div>
-      <Room>
+    <Room>
+      <div className='min-h-screen bg-[#fafbfd]'>
+        <div className='flex flex-col px-4 pt-2 gap-y-2 sticky top-0 left-0 z-10 bg-[#fafbfd] print:hidden'>
+          <Navbar />
+          <Toolbar />
+        </div>
         <Editor />
-      </Room>
-    </div>
+      </div>
+    </Room>
   );
 };
 

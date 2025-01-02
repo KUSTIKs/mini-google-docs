@@ -8,6 +8,8 @@ import {
 } from '@liveblocks/react/suspense';
 import { useParams } from 'next/navigation';
 
+import { FullscreenLoader } from '@/components/fullscreen-loader';
+
 type Props = {
   children: ReactNode;
 };
@@ -22,7 +24,9 @@ const Room = ({ children }: Props) => {
   return (
     <LiveblocksProvider throttle={16} authEndpoint='/api/liveblocks-auth'>
       <RoomProvider id={documentId}>
-        <ClientSideSuspense fallback={<div>Loading…</div>}>
+        <ClientSideSuspense
+          fallback={<FullscreenLoader label='Room loading' />}
+        >
           {children}
         </ClientSideSuspense>
       </RoomProvider>
