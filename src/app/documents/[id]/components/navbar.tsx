@@ -45,6 +45,8 @@ import { useEditorStore } from '@/store/use-editor-store';
 import { DocumentTitle } from './document-title';
 import { AvatarStackSuspense } from './avatars-stack';
 import { InboxSuspense } from './inbox';
+import { RenameDocumentDialog } from '@/components/rename-document-dialog';
+import { DeleteDocumentDialog } from '@/components/delete-document-dialog';
 
 type Props = {
   document: Doc<'documents'>;
@@ -143,6 +145,10 @@ const Navbar = ({ document }: Props) => {
     printPage();
   };
 
+  const preventDefault = (event: Pick<Event, 'preventDefault'>) => {
+    event.preventDefault();
+  };
+
   return (
     <nav className='flex items-center justify-between'>
       <div className='flex gap-2 items-center'>
@@ -190,14 +196,21 @@ const Navbar = ({ document }: Props) => {
 
                   <MenubarSeparator />
 
-                  <MenubarItem>
-                    <FilePenIcon className='size-4 mr-2' />
-                    Rename
-                  </MenubarItem>
-                  <MenubarItem>
-                    <TrashIcon className='size-4 mr-2' />
-                    Remove
-                  </MenubarItem>
+                  <RenameDocumentDialog
+                    initialTitle={document.title}
+                    documentId={document._id}
+                  >
+                    <MenubarItem onSelect={preventDefault}>
+                      <FilePenIcon className='size-4 mr-2' />
+                      Rename
+                    </MenubarItem>
+                  </RenameDocumentDialog>
+                  <DeleteDocumentDialog documentId={document._id}>
+                    <MenubarItem onSelect={preventDefault}>
+                      <TrashIcon className='size-4 mr-2' />
+                      Delete
+                    </MenubarItem>
+                  </DeleteDocumentDialog>
 
                   <MenubarSeparator />
 
