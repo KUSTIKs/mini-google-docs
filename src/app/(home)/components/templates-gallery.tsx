@@ -25,7 +25,7 @@ const TemplatesGallery = () => {
   const createTemplateDocument = (template: Template) => {
     setIsCreating(true);
     createDocument({
-      initialContent: '',
+      initialContent: template.initialContent,
       title: template.label,
     })
       .then((documentId) => {

@@ -1,4 +1,4 @@
-import { useThreads } from '@liveblocks/react/suspense';
+import { ClientSideSuspense, useThreads } from '@liveblocks/react/suspense';
 import {
   AnchoredThreads,
   FloatingComposer,
@@ -30,4 +30,12 @@ const Threads = ({ editor }: Props) => {
   );
 };
 
-export { Threads };
+const ThreadsSuspense: typeof Threads = (params) => {
+  return (
+    <ClientSideSuspense fallback={null}>
+      <Threads {...params} />
+    </ClientSideSuspense>
+  );
+};
+
+export { Threads, ThreadsSuspense };

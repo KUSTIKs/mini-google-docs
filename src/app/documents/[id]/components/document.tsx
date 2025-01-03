@@ -22,7 +22,7 @@ const Document = ({ preloadedDocument }: Props) => {
           <Navbar document={document} />
           <Toolbar />
         </div>
-        <Editor />
+        <Editor initialContent={document.initialContent} />
       </div>
     </Room>
   );

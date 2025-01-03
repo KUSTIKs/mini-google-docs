@@ -7,10 +7,14 @@ import { useStorage } from '@liveblocks/react/suspense';
 import { useEditorStore } from '@/store/use-editor-store';
 import { editorExtensions } from '../lib/tiptap';
 import { Ruller } from './ruller';
-import { Threads } from './threads';
+import { ThreadsSuspense } from './threads';
 
-const Editor = () => {
-  const liveblocks = useLiveblocksExtension();
+type Props = {
+  initialContent?: string;
+};
+
+const Editor = ({ initialContent }: Props) => {
+  const liveblocks = useLiveblocksExtension({ initialContent });
   const leftMargin = useStorage((state) => state.leftMargin);
   const rightMargin = useStorage((state) => state.rightMargin);
 
@@ -39,7 +43,7 @@ const Editor = () => {
       <Ruller />
       <div className='min-w-max flex justify-center w-[816px] py-4 print:py-0 mx-auto print:w-full print:min-w-0'>
         <EditorContent editor={editor} />
-        <Threads editor={editor} />
+        <ThreadsSuspense editor={editor} />
       </div>
     </div>
   );
