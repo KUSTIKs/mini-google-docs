@@ -1,26 +1,37 @@
-import { Room } from './components/room';
-import { Editor } from './components/editor';
-import { Navbar } from './components/navbar';
-import { Toolbar } from './components/toolbar';
+import { auth } from '@clerk/nextjs/server';
+import { preloadQuery } from 'convex/nextjs';
+
+import { Document } from './components/document';
+import { Id } from '@convex/_generated/dataModel';
+import { api } from '@convex/_generated/api';
 
 type Props = {
   params: Promise<{
-    id: string;
+    id: Id<'documents'>;
   }>;
 };
 
-const DocumentPage = async ({}: Props) => {
-  return (
-    <Room>
-      <div className='min-h-screen bg-[#fafbfd]'>
-        <div className='flex flex-col px-4 pt-2 gap-y-2 sticky top-0 left-0 z-10 bg-[#fafbfd] print:hidden'>
-          <Navbar />
-          <Toolbar />
-        </div>
-        <Editor />
-      </div>
-    </Room>
+const DocumentPage = async ({ params }: Props) => {
+  const { id } = await params;
+  const { getToken } = await auth();
+
+  const token = await getToken({ template: 'convex' });
+
+  if (!token) {
+    throw new Error('Unauthorized');
+  }
+
+  const preloadedDocument = await preloadQuery(
+    api.documents.getById,
+    { id },
+    { token }
   );
+
+  if (!preloadedDocument) {
+    throw new Error('Document not found');
+  }
+
+  return <Document preloadedDocument={preloadedDocument} />;
 };
 
 export default DocumentPage;

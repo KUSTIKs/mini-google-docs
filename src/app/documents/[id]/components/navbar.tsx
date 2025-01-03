@@ -35,13 +35,18 @@ import {
   MenubarSubTrigger,
   MenubarTrigger,
 } from '@/components/ui/menubar';
+import { Separator } from '@/components/ui/separator';
+import { Doc } from '@convex/_generated/dataModel';
 import { useEditorStore } from '@/store/use-editor-store';
 import { DocumentTitle } from './document-title';
 import { AvatarStackSuspense } from './avatars-stack';
 import { InboxSuspense } from './inbox';
-import { Separator } from '@/components/ui/separator';
 
-const Navbar = () => {
+type Props = {
+  document: Doc<'documents'>;
+};
+
+const Navbar = ({ document }: Props) => {
   const { editor } = useEditorStore();
 
   const printPage = () => {
@@ -79,7 +84,7 @@ const Navbar = () => {
   const downloadFile = (blob: Blob, filename: string) => {
     const url = URL.createObjectURL(blob);
 
-    const anchor = document.createElement('a');
+    const anchor = window.document.createElement('a');
     anchor.href = url;
     anchor.download = filename;
 
@@ -94,7 +99,7 @@ const Navbar = () => {
       type: 'application/json',
     });
 
-    downloadFile(blob, 'document.json');
+    downloadFile(blob, `${document.title}.json`);
   };
   const downloadHtml = () => {
     if (!editor) return;
@@ -104,7 +109,7 @@ const Navbar = () => {
       type: 'text/html',
     });
 
-    downloadFile(blob, 'document.html');
+    downloadFile(blob, `${document.title}.html`);
   };
   const downloadText = () => {
     if (!editor) return;
@@ -114,7 +119,7 @@ const Navbar = () => {
       type: 'text/plain',
     });
 
-    downloadFile(blob, 'document.txt');
+    downloadFile(blob, `${document.title}.txt`);
   };
   const downloadPdf = () => {
     printPage();
@@ -127,7 +132,7 @@ const Navbar = () => {
           <Image src='/logo.svg' alt='logo' width={36} height={36} priority />
         </Link>
         <div className='flex flex-col'>
-          <DocumentTitle />
+          <DocumentTitle title={document.title} id={document._id} />
           <div className='flex'>
             <Menubar className='border-none bg-transparent shadow-none h-auto p-0'>
               <MenubarMenu>
