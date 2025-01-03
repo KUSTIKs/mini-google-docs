@@ -21,10 +21,8 @@ import {
   Undo2Icon,
 } from 'lucide-react';
 import { BsFilePdf } from 'react-icons/bs';
-import { ClientSideSuspense } from '@liveblocks/react';
 import { OrganizationSwitcher, UserButton } from '@clerk/nextjs';
 
-import { DocumentTitle } from './document-title';
 import {
   Menubar,
   MenubarContent,
@@ -38,8 +36,10 @@ import {
   MenubarTrigger,
 } from '@/components/ui/menubar';
 import { useEditorStore } from '@/store/use-editor-store';
-import { AvatarsStack } from './avatars-stack';
-import { Inbox } from './inbox';
+import { DocumentTitle } from './document-title';
+import { AvatarStackSuspense } from './avatars-stack';
+import { InboxSuspense } from './inbox';
+import { Separator } from '@/components/ui/separator';
 
 const Navbar = () => {
   const { editor } = useEditorStore();
@@ -280,12 +280,9 @@ const Navbar = () => {
       </div>
 
       <div className='flex-1 flex items-center justify-end gap-2'>
-        <ClientSideSuspense fallback={null}>
-          <Inbox />
-        </ClientSideSuspense>
-        <ClientSideSuspense fallback={null}>
-          <AvatarsStack />
-        </ClientSideSuspense>
+        <AvatarStackSuspense />
+        <InboxSuspense />
+        <Separator orientation='vertical' className='h-6' />
         <OrganizationSwitcher
           afterCreateOrganizationUrl='/'
           afterLeaveOrganizationUrl='/'

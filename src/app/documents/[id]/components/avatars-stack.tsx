@@ -1,4 +1,8 @@
-import { useOthers, useSelf } from '@liveblocks/react/suspense';
+import {
+  ClientSideSuspense,
+  useOthers,
+  useSelf,
+} from '@liveblocks/react/suspense';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
@@ -60,4 +64,12 @@ const AvatarsStack = () => {
   );
 };
 
-export { AvatarsStack };
+const AvatarStackSuspense = () => {
+  return (
+    <ClientSideSuspense fallback={null}>
+      <AvatarsStack />
+    </ClientSideSuspense>
+  );
+};
+
+export { AvatarsStack, AvatarStackSuspense };

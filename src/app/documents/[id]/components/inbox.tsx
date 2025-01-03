@@ -1,6 +1,9 @@
 'use client';
 
-import { useInboxNotifications } from '@liveblocks/react/suspense';
+import {
+  ClientSideSuspense,
+  useInboxNotifications,
+} from '@liveblocks/react/suspense';
 import { InboxNotification, InboxNotificationList } from '@liveblocks/react-ui';
 import { BellIcon } from 'lucide-react';
 
@@ -46,4 +49,18 @@ const Inbox = () => {
   );
 };
 
-export { Inbox };
+const InboxSuspense = () => {
+  return (
+    <ClientSideSuspense
+      fallback={
+        <Button variant='ghost' className='relative' size='icon' disabled>
+          <BellIcon />
+        </Button>
+      }
+    >
+      <Inbox />
+    </ClientSideSuspense>
+  );
+};
+
+export { Inbox, InboxSuspense };
