@@ -1,9 +1,9 @@
 import { auth } from '@clerk/nextjs/server';
 import { preloadQuery } from 'convex/nextjs';
 
-import { Document } from './components/document';
 import { Id } from '@convex/_generated/dataModel';
 import { api } from '@convex/_generated/api';
+import { Document } from './components/document';
 
 type Props = {
   params: Promise<{

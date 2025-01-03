@@ -2,12 +2,12 @@
 
 import { useEditor, EditorContent } from '@tiptap/react';
 import { useLiveblocksExtension } from '@liveblocks/react-tiptap';
+import { useStorage } from '@liveblocks/react/suspense';
 
 import { useEditorStore } from '@/store/use-editor-store';
 import { editorExtensions } from '../lib/tiptap';
 import { Ruller } from './ruller';
 import { Threads } from './threads';
-import { useStorage } from '@liveblocks/react/suspense';
 
 const Editor = () => {
   const liveblocks = useLiveblocksExtension();

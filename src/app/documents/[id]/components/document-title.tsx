@@ -6,6 +6,7 @@ import {
   useState,
 } from 'react';
 import { toast } from 'sonner';
+import { LoaderIcon } from 'lucide-react';
 import { useMutation } from 'convex/react';
 import { BsCloudCheck, BsCloudSlash } from 'react-icons/bs';
 import { useStatus } from '@liveblocks/react';
@@ -13,7 +14,6 @@ import { useStatus } from '@liveblocks/react';
 import { useDebounce } from '@/hooks/use-debounce';
 import { api } from '@convex/_generated/api';
 import { Id } from '@convex/_generated/dataModel';
-import { LoaderIcon } from 'lucide-react';
 
 type Props = {
   title: string;

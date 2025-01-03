@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useMutation, useStorage } from '@liveblocks/react/suspense';
 
 import { cn } from '@/lib/utils';
 import { Marker as MarkerType } from './marker';
-import { useMutation, useStorage } from '@liveblocks/react/suspense';
 
 const width = 816;
 const segmentWidth = 8;
@@ -52,7 +52,7 @@ const Ruller = () => {
         setRightMargin(width - relativeX);
       }
     },
-    [activeMarker, leftMargin, rightMargin]
+    [activeMarker, leftMargin, rightMargin, setLeftMargin, setRightMargin]
   );
 
   useEffect(() => {
