@@ -7,16 +7,19 @@ import { useEditorStore } from '@/store/use-editor-store';
 import { editorExtensions } from '../lib/tiptap';
 import { Ruller } from './ruller';
 import { Threads } from './threads';
+import { useStorage } from '@liveblocks/react/suspense';
 
 const Editor = () => {
   const liveblocks = useLiveblocksExtension();
+  const leftMargin = useStorage((state) => state.leftMargin);
+  const rightMargin = useStorage((state) => state.rightMargin);
 
   const { setEditor } = useEditorStore();
   const editor = useEditor({
     immediatelyRender: false,
     editorProps: {
       attributes: {
-        style: 'padding-inline: 56px',
+        style: `padding-left: ${leftMargin}px; padding-right: ${rightMargin}px`,
         class: `focus:outline-none print:border-0 bg-white border\
           border-[#c7c7c7] flex flex-col min-h-[1054px] w-[816px]\
           pt-10 pr-14 pb-10 cursor-text`,

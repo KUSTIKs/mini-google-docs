@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { cn } from '@/lib/utils';
 import { Marker as MarkerType } from './marker';
+import { useMutation, useStorage } from '@liveblocks/react/suspense';
 
 const width = 816;
 const segmentWidth = 8;
@@ -13,8 +14,16 @@ const segments = [...Array(segmentsCount).keys()];
 type MarkerType = 'left' | 'right';
 
 const Ruller = () => {
-  const [leftMargin, setLeftMargin] = useState(56);
-  const [rightMargin, setRightMargin] = useState(56);
+  const leftMargin = useStorage((state) => state.leftMargin);
+  const setLeftMargin = useMutation(({ storage }, value: number) => {
+    storage.set('leftMargin', value);
+  }, []);
+
+  const rightMargin = useStorage((state) => state.rightMargin);
+  const setRightMargin = useMutation(({ storage }, value: number) => {
+    storage.set('rightMargin', value);
+  }, []);
+
   const [activeMarker, setActiveMarker] = useState<MarkerType | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 

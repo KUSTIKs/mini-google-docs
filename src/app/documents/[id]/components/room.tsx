@@ -14,6 +14,7 @@ import { FullscreenLoader } from '@/components/fullscreen-loader';
 import { User } from '../lib/liveblocks';
 import { getUsers, getDocuments } from '../actions';
 import { Id } from '@convex/_generated/dataModel';
+import { liveblocksInitialStorage } from '../constants/liveblocks';
 
 type Props = {
   children: ReactNode;
@@ -82,7 +83,7 @@ const Room = ({ children }: Props) => {
       resolveMentionSuggestions={resolveMentionSuggestions}
       resolveRoomsInfo={resolveRoomsInfo}
     >
-      <RoomProvider id={documentId}>
+      <RoomProvider id={documentId} initialStorage={liveblocksInitialStorage}>
         <ClientSideSuspense
           fallback={<FullscreenLoader label='Room loading' />}
         >
