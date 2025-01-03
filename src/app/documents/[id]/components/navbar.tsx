@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import {
   BoldIcon,
   FileIcon,
@@ -22,6 +23,8 @@ import {
 } from 'lucide-react';
 import { BsFilePdf } from 'react-icons/bs';
 import { OrganizationSwitcher, UserButton } from '@clerk/nextjs';
+import { useMutation } from 'convex/react';
+import { toast } from 'sonner';
 
 import {
   Menubar,
@@ -37,6 +40,7 @@ import {
 } from '@/components/ui/menubar';
 import { Separator } from '@/components/ui/separator';
 import { Doc } from '@convex/_generated/dataModel';
+import { api } from '@convex/_generated/api';
 import { useEditorStore } from '@/store/use-editor-store';
 import { DocumentTitle } from './document-title';
 import { AvatarStackSuspense } from './avatars-stack';
@@ -47,7 +51,21 @@ type Props = {
 };
 
 const Navbar = ({ document }: Props) => {
+  const router = useRouter();
+
   const { editor } = useEditorStore();
+  const createDocument = useMutation(api.documents.create);
+
+  const handleNewDocument = () => {
+    createDocument({
+      title: 'Untitled document',
+    })
+      .then((id) => {
+        toast.success('Document created');
+        router.push(`/documents/${id}`);
+      })
+      .catch(() => toast.error('Something went wrong'));
+  };
 
   const printPage = () => {
     window.print();
@@ -165,7 +183,7 @@ const Navbar = ({ document }: Props) => {
                     </MenubarSubContent>
                   </MenubarSub>
 
-                  <MenubarItem>
+                  <MenubarItem onClick={handleNewDocument}>
                     <FilePlusIcon className='size-4 mr-2' />
                     New Document
                   </MenubarItem>
