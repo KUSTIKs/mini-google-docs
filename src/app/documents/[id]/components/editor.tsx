@@ -24,9 +24,9 @@ const Editor = ({ initialContent }: Props) => {
     immediatelyRender: false,
     editorProps: {
       attributes: {
-        style: `padding-left: ${leftMargin}px; padding-right: ${rightMargin}px`,
+        style: `padding-left: ${leftMargin}px; padding-right: ${rightMargin}px; width: ${documentWidth}px`,
         class: `focus:outline-none print:border-0 bg-white border\
-          border-[#c7c7c7] flex flex-col min-h-[1054px] w-[${documentWidth}px]\
+          border-[#c7c7c7] flex flex-col min-h-[1054px]\
           pt-10 pr-14 pb-10 cursor-text`,
       },
     },
@@ -43,7 +43,8 @@ const Editor = ({ initialContent }: Props) => {
     <div className='size-full overflow-x-auto bg-[#f9fbfd] px-4 print:p-0 print:overflow-visible flex-col'>
       <Ruller />
       <div
-        className={`min-w-max flex justify-center w-[${documentWidth}px] py-4 print:py-0 mx-auto print:w-full print:min-w-0}`}
+        style={{ width: documentWidth }}
+        className='min-w-max flex justify-center py-4 print:py-0 mx-auto print:w-full print:min-w-0'
       >
         <EditorContent editor={editor} />
         <ThreadsSuspense editor={editor} />

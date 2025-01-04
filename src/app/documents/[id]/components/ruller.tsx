@@ -72,7 +72,8 @@ const Ruller = () => {
     <div className='h-6 border-b border-gray-300 flex items-end relative select-none print:hidden'>
       <div
         ref={containerRef}
-        className={`w-[${documentWidth}px] mx-auto h-full relative`}
+        style={{ width: documentWidth }}
+        className='mx-auto h-full relative'
       >
         <MarkerType
           side='left'
