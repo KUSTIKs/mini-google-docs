@@ -21,7 +21,7 @@ const CommentButton = () => {
     <ToolButton
       icon={MessageSquarePlusIcon}
       onClick={handleClick}
-      isActive={editorState.hasComment}
+      isActive={editorState?.hasComment}
     />
   );
 };

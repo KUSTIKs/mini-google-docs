@@ -10,7 +10,7 @@ const parseString = (value: unknown): string | undefined => {
   return isString ? value : undefined;
 };
 
-const colorForString = (value: string) => {
+const getColorForString = (value: string) => {
   const nameNumber = [...value].reduce(
     (acc, char) => acc + char.charCodeAt(0),
     0
@@ -21,4 +21,4 @@ const colorForString = (value: string) => {
   return color;
 };
 
-export { cn, parseString, colorForString };
+export { cn, parseString, getColorForString };
