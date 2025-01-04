@@ -26,6 +26,7 @@ declare global {
 
         name: string;
         avatarUrl: string;
+        color: string;
       };
     };
 

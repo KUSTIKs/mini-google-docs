@@ -10,4 +10,15 @@ const parseString = (value: unknown): string | undefined => {
   return isString ? value : undefined;
 };
 
-export { cn, parseString };
+const colorForString = (value: string) => {
+  const nameNumber = [...value].reduce(
+    (acc, char) => acc + char.charCodeAt(0),
+    0
+  );
+  const hue = nameNumber % 360;
+  const color = `hsl(${hue}, 80%, 60%)`;
+
+  return color;
+};
+
+export { cn, parseString, colorForString };

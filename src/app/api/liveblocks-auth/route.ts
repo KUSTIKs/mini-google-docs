@@ -3,6 +3,7 @@ import { ConvexHttpClient } from 'convex/browser';
 
 import { api } from '@convex/_generated/api';
 import { Liveblocks } from '@liveblocks/node';
+import { colorForString } from '@/lib/utils';
 
 const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 const liveblocks = new Liveblocks({
@@ -46,11 +47,15 @@ const POST = async (req: Request) => {
     });
   }
 
+  const name =
+    user.fullName || user.primaryEmailAddress?.emailAddress || 'Anonymous';
+  const color = colorForString(name);
+
   const session = liveblocks.prepareSession(user.id, {
     userInfo: {
-      name:
-        user.fullName || user.primaryEmailAddress?.emailAddress || 'Anonymous',
+      name,
       avatarUrl: user.imageUrl,
+      color,
     },
   });
   session.allow(room, session.FULL_ACCESS);
