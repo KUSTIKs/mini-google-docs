@@ -1,4 +1,4 @@
-import { defaultMargin } from './margins';
+import { defaultMargin } from './document';
 
 const liveblocksInitialStorage: Liveblocks['Storage'] = {
   leftMargin: defaultMargin,

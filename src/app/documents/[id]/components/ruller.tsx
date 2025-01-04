@@ -3,13 +3,13 @@ import { useMutation, useStorage } from '@liveblocks/react/suspense';
 
 import { cn } from '@/lib/utils';
 import { Marker as MarkerType } from './marker';
+import {
+  documentWidth,
+  minMarginGap,
+  rullerSegmentsCount,
+} from '../constants/document';
 
-const width = 816;
-const segmentWidth = 8;
-const minMarkerGap = 100;
-
-const segmentsCount = Math.floor(width / segmentWidth);
-const segments = [...Array(segmentsCount).keys()];
+const segments = [...Array(rullerSegmentsCount).keys()];
 
 type MarkerType = 'left' | 'right';
 
@@ -38,18 +38,21 @@ const Ruller = () => {
       const containerX = containerRef.current.getBoundingClientRect().x;
       const eventX = event.clientX;
 
-      const relativeX = Math.max(0, Math.min(eventX - containerX, width));
+      const relativeX = Math.max(
+        0,
+        Math.min(eventX - containerX, documentWidth)
+      );
 
       if (activeMarker === 'left') {
-        const diff = width - relativeX - rightMargin;
-        if (diff < minMarkerGap) return;
+        const diff = documentWidth - relativeX - rightMargin;
+        if (diff < minMarginGap) return;
 
         setLeftMargin(relativeX);
       } else if (activeMarker === 'right') {
         const diff = relativeX - leftMargin;
-        if (diff < minMarkerGap) return;
+        if (diff < minMarginGap) return;
 
-        setRightMargin(width - relativeX);
+        setRightMargin(documentWidth - relativeX);
       }
     },
     [activeMarker, leftMargin, rightMargin, setLeftMargin, setRightMargin]
@@ -69,7 +72,7 @@ const Ruller = () => {
     <div className='h-6 border-b border-gray-300 flex items-end relative select-none print:hidden'>
       <div
         ref={containerRef}
-        className={`max-w-[816px] mx-auto w-full h-full relative`}
+        className={`w-[${documentWidth}px] mx-auto h-full relative`}
       >
         <MarkerType
           side='left'

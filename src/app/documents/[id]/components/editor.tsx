@@ -5,9 +5,10 @@ import { useLiveblocksExtension } from '@liveblocks/react-tiptap';
 import { useStorage } from '@liveblocks/react/suspense';
 
 import { useEditorStore } from '@/store/use-editor-store';
-import { editorExtensions } from '../lib/tiptap';
 import { Ruller } from './ruller';
 import { ThreadsSuspense } from './threads';
+import { editorExtensions } from '../lib/tiptap';
+import { documentWidth } from '../constants/document';
 
 type Props = {
   initialContent?: string;
@@ -25,7 +26,7 @@ const Editor = ({ initialContent }: Props) => {
       attributes: {
         style: `padding-left: ${leftMargin}px; padding-right: ${rightMargin}px`,
         class: `focus:outline-none print:border-0 bg-white border\
-          border-[#c7c7c7] flex flex-col min-h-[1054px] w-[816px]\
+          border-[#c7c7c7] flex flex-col min-h-[1054px] w-[${documentWidth}px]\
           pt-10 pr-14 pb-10 cursor-text`,
       },
     },
@@ -41,7 +42,9 @@ const Editor = ({ initialContent }: Props) => {
   return (
     <div className='size-full overflow-x-auto bg-[#f9fbfd] px-4 print:p-0 print:overflow-visible flex-col'>
       <Ruller />
-      <div className='min-w-max flex justify-center w-[816px] py-4 print:py-0 mx-auto print:w-full print:min-w-0'>
+      <div
+        className={`min-w-max flex justify-center w-[${documentWidth}px] py-4 print:py-0 mx-auto print:w-full print:min-w-0}`}
+      >
         <EditorContent editor={editor} />
         <ThreadsSuspense editor={editor} />
       </div>
