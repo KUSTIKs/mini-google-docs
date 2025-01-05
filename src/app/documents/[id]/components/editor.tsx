@@ -21,6 +21,7 @@ const Editor = ({ initialContent }: Props) => {
 
   const { setEditor } = useEditorStore();
   const editor = useEditor({
+    autofocus: true,
     immediatelyRender: false,
     editorProps: {
       attributes: {
