@@ -12,9 +12,9 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { DocumentRow } from './document-row';
 import { Button } from '@/components/ui/button';
 import { useSearchParam } from '@/hooks/use-search-param';
+import { DocumentRow } from './document-row';
 
 const DocumentsList = () => {
   const [search] = useSearchParam();

@@ -42,11 +42,11 @@ import { Separator } from '@/components/ui/separator';
 import { Doc } from '@convex/_generated/dataModel';
 import { api } from '@convex/_generated/api';
 import { useEditorStore } from '@/store/use-editor-store';
+import { RenameDocumentDialog } from '@/components/rename-document-dialog';
+import { DeleteDocumentDialog } from '@/components/delete-document-dialog';
 import { DocumentTitle } from './document-title';
 import { AvatarStackSuspense } from './avatars-stack';
 import { InboxSuspense } from './inbox';
-import { RenameDocumentDialog } from '@/components/rename-document-dialog';
-import { DeleteDocumentDialog } from '@/components/delete-document-dialog';
 
 type Props = {
   document: Doc<'documents'>;

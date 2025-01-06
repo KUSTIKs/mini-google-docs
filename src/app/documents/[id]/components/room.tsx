@@ -11,10 +11,10 @@ import { useParams } from 'next/navigation';
 import { toast } from 'sonner';
 
 import { FullscreenLoader } from '@/components/fullscreen-loader';
-import { User } from '../lib/liveblocks';
-import { getUsers, getDocuments } from '../actions';
 import { Id } from '@convex/_generated/dataModel';
 import { liveblocksInitialStorage } from '../constants/liveblocks';
+import { User } from '../lib/liveblocks';
+import { getUsers, getDocuments } from '../actions';
 
 type Props = {
   children: ReactNode;

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   ExternalLinkIcon,
   FilePenIcon,
@@ -15,7 +16,6 @@ import { Button } from '@/components/ui/button';
 import { DeleteDocumentDialog } from '@/components/delete-document-dialog';
 import { RenameDocumentDialog } from '@/components/rename-document-dialog';
 import { Id } from '@convex/_generated/dataModel';
-import { useState } from 'react';
 
 type Props = {
   documentId: Id<'documents'>;
